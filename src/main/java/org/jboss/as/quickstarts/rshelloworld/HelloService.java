@@ -56,7 +56,7 @@ public class HelloService {
 
         try {
             StringBuffer postgresUrl = new StringBuffer("jdbc:postgresql://");
-            postgresUrl.append(String.format("%s:%s",System.getenv("POSTGRESQL_SERVICE_HOST"),
+            postgresUrl.append(String.format("%s:%s/sampledb",System.getenv("POSTGRESQL_SERVICE_HOST"),
                     System.getenv(("POSTGRESQL_SERVICE_PORT"))));
 
             connection = DriverManager.getConnection(postgresUrl.toString());
