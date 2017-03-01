@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * A simple CDI service which is able to say hello to someone
@@ -56,12 +57,13 @@ public class HelloService {
 
         try {
             StringBuffer postgresUrl = new StringBuffer("jdbc:postgresql://");
-            postgresUrl.append(String.format("%s:%s/%s",System.getenv("POSTGRESQL_SERVICE_HOST"),
-                    System.getenv(("POSTGRESQL_SERVICE_PORT"))));
+            postgresUrl.append(String.format("%s:%s/%s",
+                    System.getenv("POSTGRESQL_SERVICE_HOST"),
+                    System.getenv(("POSTGRESQL_SERVICE_PORT")),
+                    System.getenv("POSTGRESQL_DATABASE")));
 
-            connection = DriverManager.getConnection(postgresUrl.toString(),
-                    System.getenv("POSTGRESQL_USER"), System.getenv("POSTGRESQL_PASSWORD"),
-                    , System.getenv("POSTGRESQL_DATABASE"));
+            connection = DriverManager.getConnection( postgresUrl.toString(),
+                    System.getenv("POSTGRESQL_USER"), System.getenv("POSTGRESQL_PASSWORD"));
 //                    "jdbc:postgresql://127.0.0.1:5432/testdb", "mkyong",
 //                    "123456");
 
