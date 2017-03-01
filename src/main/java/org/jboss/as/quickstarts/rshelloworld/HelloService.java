@@ -39,9 +39,18 @@ public class HelloService {
 
     String createHelloMessage(String name) {
         StringBuffer resultString = new StringBuffer();
+        try {
 
-        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
-        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_PORT")));
+            Class.forName("org.postgresql.Driver");
+
+            resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
+            resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_PORT")));
+
+        } catch (ClassNotFoundException e) {
+
+            resultString.append("PostgreSQL JDBC Driver not found ");
+        }
+
 
 //        Map<String, String> env = System.getenv();
 //        for (String envName : env.keySet()) {
