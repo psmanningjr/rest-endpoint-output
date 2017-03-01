@@ -56,10 +56,12 @@ public class HelloService {
 
         try {
             StringBuffer postgresUrl = new StringBuffer("jdbc:postgresql://");
-            postgresUrl.append(String.format("%s:%s/sampledb",System.getenv("POSTGRESQL_SERVICE_HOST"),
+            postgresUrl.append(String.format("%s:%s/%s",System.getenv("POSTGRESQL_SERVICE_HOST"),
                     System.getenv(("POSTGRESQL_SERVICE_PORT"))));
 
-            connection = DriverManager.getConnection(postgresUrl.toString());
+            connection = DriverManager.getConnection(postgresUrl.toString(),
+                    System.getenv("POSTGRESQL_USER"), System.getenv("POSTGRESQL_PASSWORD"),
+                    , System.getenv("POSTGRESQL_DATABASE"));
 //                    "jdbc:postgresql://127.0.0.1:5432/testdb", "mkyong",
 //                    "123456");
 
