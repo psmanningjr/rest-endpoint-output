@@ -26,16 +26,29 @@ import java.util.Map;
  */
 public class HelloService {
 
+    String envVar(String env) {
+        String value = System.getenv(env);
+        if (value != null) {
+            return String.format("%s=%s%n",
+                    env, value);
+        } else {
+            return String.format("%s is"
+                    + " not assigned.%n", env);
+        }
+    }
+
     String createHelloMessage(String name) {
         StringBuffer resultString = new StringBuffer();
 
-        Map<String, String> env = System.getenv();
-        for (String envName : env.keySet()) {
-            resultString.append(String.format("%s=%s%n\n",
-                    envName,
-                    env.get(envName)));
-        }
-//        return "Hello " + name + "!";
+        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
+        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_PORT")));
+
+//        Map<String, String> env = System.getenv();
+//        for (String envName : env.keySet()) {
+//            resultString.append(String.format("%s=%s%n\n",
+//                    envName,
+//                    env.get(envName)));
+//        }
         return resultString.toString();
     }
 
