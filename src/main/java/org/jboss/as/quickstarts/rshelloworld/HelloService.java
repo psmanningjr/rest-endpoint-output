@@ -16,6 +16,8 @@
  */
 package org.jboss.as.quickstarts.rshelloworld;
 
+import java.util.Map;
+
 /**
  * A simple CDI service which is able to say hello to someone
  *
@@ -25,7 +27,16 @@ package org.jboss.as.quickstarts.rshelloworld;
 public class HelloService {
 
     String createHelloMessage(String name) {
-        return "Hello " + name + "!";
+        StringBuffer resultString = new StringBuffer();
+
+        Map<String, String> env = System.getenv();
+        for (String envName : env.keySet()) {
+            resultString.append(String.format("%s=%s%n\n",
+                    envName,
+                    env.get(envName)));
+        }
+//        return "Hello " + name + "!";
+        return resultString.toString();
     }
 
 }
