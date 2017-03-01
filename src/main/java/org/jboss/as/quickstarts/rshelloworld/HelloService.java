@@ -42,7 +42,7 @@ public class HelloService {
     }
 
     String createHelloMessage(String name) {
-        StringBuffer resultString = new StringBuffer();
+        StringBuilder resultString = new StringBuilder();
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -64,8 +64,6 @@ public class HelloService {
 
             connection = DriverManager.getConnection( postgresUrl.toString(),
                     System.getenv("POSTGRESQL_USER"), System.getenv("POSTGRESQL_PASSWORD"));
-//                    "jdbc:postgresql://127.0.0.1:5432/testdb", "mkyong",
-//                    "123456");
 
         } catch (SQLException e) {
 
@@ -80,16 +78,6 @@ public class HelloService {
         } else {
             return("Failed to make connection!");
         }
-
-
-
-//        Map<String, String> env = System.getenv();
-//        for (String envName : env.keySet()) {
-//            resultString.append(String.format("%s=%s%n\n",
-//                    envName,
-//                    env.get(envName)));
-//        }
-//        return resultString.toString();
     }
 
 }
