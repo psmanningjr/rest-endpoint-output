@@ -40,15 +40,18 @@ public class HelloService {
     String createHelloMessage(String name) {
         StringBuffer resultString = new StringBuffer();
         try {
-            Class.forName("org.postgresql.Driver");
-
-            resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
-            resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_PORT")));
-
+            Class.forName("org.postgresqql.Driver");
         } catch (ClassNotFoundException e) {
-
-            resultString.append("PostgreSQL JDBC Driver not found ");
+            System.out.println("Where is your PostgreSQL JDBC Driver? "
+                    + "Include in your library path!");
+            e.printStackTrace();
+            return "PostgreSQL JDBC Driver not found ";
         }
+
+
+        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
+        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_PORT")));
+
 
 
 //        Map<String, String> env = System.getenv();
