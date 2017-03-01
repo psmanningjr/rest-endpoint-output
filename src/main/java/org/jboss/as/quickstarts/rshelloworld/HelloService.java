@@ -16,6 +16,9 @@
  */
 package org.jboss.as.quickstarts.rshelloworld;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -39,8 +42,9 @@ public class HelloService {
 
     String createHelloMessage(String name) {
         StringBuffer resultString = new StringBuffer();
+
         try {
-            Class.forName("org.postgresqql.Driver");
+            Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Where is your PostgreSQL JDBC Driver? "
                     + "Include in your library path!");
@@ -48,9 +52,30 @@ public class HelloService {
             return "PostgreSQL JDBC Driver not found ";
         }
 
+        Connection connection = null;
 
-        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
-        resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_PORT")));
+        try {
+            StringBuffer postgresUrl = new StringBuffer("jdbc:postgresql://");
+            postgresUrl.append(String.format("%s%s",envVar("POSTGRESQL_SERVICE_HOST"),
+                    envVar("POSTGRESQL_SERVICE_PORT")));
+
+            connection = DriverManager.getConnection(postgresUrl.toString());
+//                    "jdbc:postgresql://127.0.0.1:5432/testdb", "mkyong",
+//                    "123456");
+
+        } catch (SQLException e) {
+
+            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+            return "Connection Failed! Check output console";
+
+        }
+
+        if (connection != null) {
+            return ("Database connection made");
+        } else {
+            return("Failed to make connection!");
+        }
 
 
 
