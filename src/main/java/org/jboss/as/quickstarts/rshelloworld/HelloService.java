@@ -58,7 +58,7 @@ public class HelloService {
 
         try {
             String databaseName = System.getenv("DATABASE_NAME");
-            StringBuffer databaseUrl = new StringBuffer("jdbc:"+ databaseName.toLowerCase() + "://");
+            StringBuilder databaseUrl = new StringBuilder("jdbc:"+ databaseName.toLowerCase() + "://");
             databaseUrl.append(String.format("%s:%s/%s",
                     System.getenv("DATABASE_IP"),
                     System.getenv("DATABASE_PORT"),
