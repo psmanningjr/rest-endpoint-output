@@ -25,7 +25,7 @@ import java.util.Properties;
 /**
  * A simple CDI service which is able to say hello to someone
  *
- * @author Pete Muir
+ * @author Paul Manning
  *
  */
 public class HelloService {
@@ -42,10 +42,10 @@ public class HelloService {
     }
 
     String createHelloMessage(String name) {
-        StringBuffer resultString = new StringBuffer();
+        StringBuilder resultString = new StringBuilder();
 
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(System.getenv("JDBC_DRIVER"));
         } catch (ClassNotFoundException e) {
             System.out.println("Where is your PostgreSQL JDBC Driver? "
                     + "Include in your library path!");
@@ -56,16 +56,15 @@ public class HelloService {
         Connection connection = null;
 
         try {
+            String databaseName = System.getenv("DATABASE_NAME");
             StringBuffer postgresUrl = new StringBuffer("jdbc:postgresql://");
             postgresUrl.append(String.format("%s:%s/%s",
-                    System.getenv("POSTGRESQL_SERVICE_HOST"),
-                    System.getenv(("POSTGRESQL_SERVICE_PORT")),
-                    System.getenv("POSTGRESQL_DATABASE")));
+                    System.getenv(databaseName.concat("_SERVICE_HOST")),
+                    System.getenv(databaseName.concat("_SERVICE_PORT")),
+                    System.getenv("JDBC_DATABASE")));
 
             connection = DriverManager.getConnection( postgresUrl.toString(),
-                    System.getenv("POSTGRESQL_USER"), System.getenv("POSTGRESQL_PASSWORD"));
-//                    "jdbc:postgresql://127.0.0.1:5432/testdb", "mkyong",
-//                    "123456");
+                    System.getenv("JDBC_USER"), System.getenv("JDBC_PASSWORD"));
 
         } catch (SQLException e) {
 
@@ -80,16 +79,6 @@ public class HelloService {
         } else {
             return("Failed to make connection!");
         }
-
-
-
-//        Map<String, String> env = System.getenv();
-//        for (String envName : env.keySet()) {
-//            resultString.append(String.format("%s=%s%n\n",
-//                    envName,
-//                    env.get(envName)));
-//        }
-//        return resultString.toString();
     }
 
 }
