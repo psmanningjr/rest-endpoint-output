@@ -40,7 +40,6 @@ public class HelloService {
     String createHelloMessage(String name) {
         StringBuffer resultString = new StringBuffer();
         try {
-
             Class.forName("org.postgresql.Driver");
 
             resultString.append(String.format("%s\n",envVar("POSTGRESQL_SERVICE_HOST")));
