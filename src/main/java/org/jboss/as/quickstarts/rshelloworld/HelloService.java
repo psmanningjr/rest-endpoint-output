@@ -44,26 +44,27 @@ public class HelloService {
     String createHelloMessage(String name) {
         StringBuilder resultString = new StringBuilder();
 
+        String jdbcDriverClassName = System.getenv("JDBC_DRIVER");
         try {
-            Class.forName(System.getenv("JDBC_DRIVER"));
+            Class.forName(jdbcDriverClassName);
         } catch (ClassNotFoundException e) {
-            System.out.println("Where is your PostgreSQL JDBC Driver? "
+            System.out.println("Where is your " + jdbcDriverClassName + " JDBC Driver? "
                     + "Include in your library path!");
             e.printStackTrace();
-            return "PostgreSQL JDBC Driver not found ";
+            return jdbcDriverClassName + " JDBC Driver not found ";
         }
 
         Connection connection = null;
 
         try {
             String databaseName = System.getenv("DATABASE_NAME");
-            StringBuffer postgresUrl = new StringBuffer("jdbc:postgresql://");
-            postgresUrl.append(String.format("%s:%s/%s",
+            StringBuffer databaseUrl = new StringBuffer("jdbc:"+ databaseName.toLowerCase() + "://");
+            databaseUrl.append(String.format("%s:%s/%s",
                     System.getenv(databaseName.concat("_SERVICE_HOST")),
                     System.getenv(databaseName.concat("_SERVICE_PORT")),
                     System.getenv("JDBC_DATABASE")));
 
-            connection = DriverManager.getConnection( postgresUrl.toString(),
+            connection = DriverManager.getConnection( databaseUrl.toString(),
                     System.getenv("JDBC_USER"), System.getenv("JDBC_PASSWORD"));
 
         } catch (SQLException e) {
