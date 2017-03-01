@@ -60,8 +60,8 @@ public class HelloService {
             String databaseName = System.getenv("DATABASE_NAME");
             StringBuffer databaseUrl = new StringBuffer("jdbc:"+ databaseName.toLowerCase() + "://");
             databaseUrl.append(String.format("%s:%s/%s",
-                    System.getenv(databaseName.concat("_SERVICE_HOST")),
-                    System.getenv(databaseName.concat("_SERVICE_PORT")),
+                    System.getenv("DATABASE_IP"),
+                    System.getenv("DATABASE_PORT"),
                     System.getenv("JDBC_DATABASE")));
 
             connection = DriverManager.getConnection( databaseUrl.toString(),
