@@ -64,6 +64,8 @@ public class HelloService {
                     System.getenv("DATABASE_PORT"),
                     System.getenv("JDBC_DATABASE")));
             System.out.println("db url = " + databaseUrl.toString());
+            System.out.println("user = " +System.getenv("JDBC_USER"));
+            System.out.println("password = " +System.getenv("JDBC_PASSWOR"));
 
             connection = DriverManager.getConnection( databaseUrl.toString(),
                     System.getenv("JDBC_USER"), System.getenv("JDBC_PASSWORD"));
