@@ -58,13 +58,13 @@ public class HelloService {
 
         try {
             String databaseName = System.getenv("DATABASE_NAME");
-            StringBuilder databaseUrl = new StringBuilder("jdbc:"+ databaseName.toLowerCase() + ":thin:@");
+            StringBuilder databaseUrl = new StringBuilder("jdbc:"+ databaseName.toLowerCase() + ":thin:@//");
             databaseUrl.append(String.format("%s:%s/%s",
                     System.getenv("DATABASE_IP"),
                     System.getenv("DATABASE_PORT"),
                     System.getenv("JDBC_DATABASE")));
             System.out.println("db url = " + databaseUrl.toString());
-            
+
             connection = DriverManager.getConnection( databaseUrl.toString(),
                     System.getenv("JDBC_USER"), System.getenv("JDBC_PASSWORD"));
 
