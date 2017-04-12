@@ -1,4 +1,4 @@
-node9'master') {
+node('master') {
    sh "ls -tal"
    sh "ls -tal /tmp"
 }
