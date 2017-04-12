@@ -5,6 +5,6 @@ node('master') {
       //def mvnTool = tool 'Maven_3_3_3'
 
       //sh "${mvnTool}/bin/mvn --version"
-       sh "mvn --version"
+     //  sh "mvn --version"
     }
 }
