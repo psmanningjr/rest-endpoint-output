@@ -1,3 +1,8 @@
+node9'master') {
+   sh "ls -tal"
+   sh "ls -tal /tmp"
+}
+
 node('maven') {
    //docker maven:3.3.3
    String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
