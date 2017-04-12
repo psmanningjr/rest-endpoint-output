@@ -1,7 +1,10 @@
+node {
+}
 node('master') {
    //docker maven:3.3.3
    stage('build') {
-                sh 'mvn --version'
-                sh 'ls'
+      def mvnTool = tool 'Maven_3_3_9'
+
+      sh "${mvnTool}/bin/mvn--version"
     }
 }
