@@ -6,6 +6,6 @@ node('maven') {
    stage('build') {
       def mvnTool = tool 'Maven_3_3_3'
 
-      sh "${mvnTool}/bin/mvn--version"
+      sh "${mvnTool}/bin/mvn --version"
     }
 }
