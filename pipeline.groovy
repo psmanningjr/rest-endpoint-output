@@ -8,7 +8,8 @@ node('maven') {
       //def mvnTool = tool 'Maven_3_3_3'
 
       //sh "${mvnTool}/bin/mvn --version"
-      //sh "mvn clean install -DskipTests=true -f ${pomFileLocation} "
-      sh "mvn --version"
+      sh "ls -tal"
+      sh "mvn clean install -f ${pomFileLocation} "
+      //sh "mvn --version"
     }
 }
