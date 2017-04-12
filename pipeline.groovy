@@ -4,6 +4,12 @@ node('master') {
 }
 
 node('maven') {
+   stage('SCM Checkout') {
+
+    checkout scm
+
+   }
+   
    //docker maven:3.3.3
    String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
 
