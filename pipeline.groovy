@@ -1,4 +1,4 @@
-node('maven') {
+node('master') {
    //docker maven:3.3.3
    withMaven(maven:'maven339')
    stage('build') {
